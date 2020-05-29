@@ -1,13 +1,26 @@
-import React from 'react';
+import React, {useRef, useEffect} from 'react';
 import {View, StyleSheet, TouchableHighlight} from 'react-native';
-import Sound from 'react-native-sound';
 import {playSound} from '../utils/sound';
+import {useSelector, useDispatch} from 'react-redux';
+import {ACTION_TYPES, LIGHT_COLORS} from '../utils/constants';
+import {addToUserInput} from '../redux/actions';
 
 const Button = ({color, position}) => {
-  let combinedStyles;
+  const status = useSelector(state => state.status);
+  const turnOn = useSelector(state => state.turnOn);
+  const disabled = !(status === ACTION_TYPES.STATUS_USER_INPUT);
+  const dispatch = useDispatch();
+
+  let combinedStyles,
+    active = false;
+
+  if (turnOn === color[0]) {
+    active = true;
+  }
+
   const handleTouch = () => {
-    console.log(color);
     playSound(`${color}.mp3`);
+    dispatch(addToUserInput(color[0]));
   };
 
   switch (position) {
@@ -24,10 +37,15 @@ const Button = ({color, position}) => {
       combinedStyles = StyleSheet.flatten([styles.root, styles.bottomLeft]);
       break;
   }
-  console.log({combinedStyles});
   return (
-    <TouchableHighlight onPress={handleTouch} style={combinedStyles}>
-      <View style={combinedStyles} backgroundColor={color} />
+    <TouchableHighlight
+      onPress={handleTouch}
+      style={combinedStyles}
+      disabled={disabled}>
+      <View
+        style={combinedStyles}
+        backgroundColor={active ? LIGHT_COLORS[color[0]] : color}
+      />
     </TouchableHighlight>
   );
 };
@@ -38,6 +56,9 @@ const styles = StyleSheet.create({
   root: {
     width: 180,
     height: 180,
+  },
+  active: {
+    backgroundColor: 'white',
   },
   topLeft: {
     borderBottomLeftRadius: 20,
