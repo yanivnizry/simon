@@ -3,7 +3,7 @@ import {StyleSheet, View, Text, FlatList} from 'react-native';
 import {useSelector} from 'react-redux';
 
 const Results = () => {
-  const results = useSelector(state => state.results);
+  const results = useSelector((state) => state.results);
 
   const Item = ({name, score}) => {
     return (
@@ -21,7 +21,7 @@ const Results = () => {
   return (
     <Fragment>
       <FlatList
-        data={results.sort((a, b) => b.score - a.score)}
+        data={results.sort((a, b) => b.score - a.score).slice(0, 10)}
         renderItem={({item}) => <Item name={item.name} score={item.score} />}
         keyExtractor={(item, index) => item.name + index}
       />

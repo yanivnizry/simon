@@ -24,10 +24,10 @@ import {playSound} from '../utils/sound';
 
 const Board = ({navigation}) => {
   const dispatch = useDispatch();
-  const status = useSelector(state => state.status);
-  const sequence = useSelector(state => state.sequence);
-  const userInput = useSelector(state => state.userInput);
-  const results = useSelector(state => state.results);
+  const status = useSelector((state) => state.status);
+  const sequence = useSelector((state) => state.sequence);
+  const userInput = useSelector((state) => state.userInput);
+  const results = useSelector((state) => state.results);
   const disabled = !(status === ACTION_TYPES.STATUS_FINISH);
 
   const playSequence = useCallback(async () => {
@@ -103,7 +103,7 @@ const Board = ({navigation}) => {
       <View style={styles.game}>
         <AskForName
           visible={status && status === ACTION_TYPES.STATUS_ASK_NAME}
-          onPress={text => {
+          onPress={(text) => {
             dispatch(addToResults({name: text, score: sequence.length - 1}));
             navigation.navigate('Results');
             dispatch(finish());
