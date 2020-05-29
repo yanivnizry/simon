@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {ACTION_TYPES} from '../utils/constants';
 import AskForName from '../components/AskForName';
 import GameButton from '../components/Button';
-import {FULL_COLORS} from '../utils/constants';
+import {FULL_COLORS, GAME_DELAY} from '../utils/constants';
 
 import {
   addToResults,
@@ -31,17 +31,17 @@ const Board = ({navigation}) => {
   const disabled = !(status === ACTION_TYPES.STATUS_FINISH);
 
   const playSequence = useCallback(async () => {
-    await sleep(500);
+    await sleep(GAME_DELAY);
     for (let i = 0; i < sequence.length; i++) {
       const colorName = sequence[i];
       dispatch(turnOn(colorName));
       playSound(`${FULL_COLORS[colorName]}.mp3`);
-      await sleep(500);
+      await sleep(GAME_DELAY);
       dispatch(turnAllOff());
-      await sleep(500);
+      await sleep(GAME_DELAY);
     }
-    await sleep(500);
 
+    await sleep(GAME_DELAY);
     dispatch(startUserInput());
   }, [dispatch, sequence]);
 
@@ -64,7 +64,6 @@ const Board = ({navigation}) => {
           dispatch(play());
         } else if (userInput !== sequence.slice(0, userInput.length)) {
           //failed
-          console.log('failed');
           const sorted = results && results.sort((a, b) => b.score - a.score);
           const showAskForName =
             !sequence.length ||
@@ -85,8 +84,6 @@ const Board = ({navigation}) => {
       default:
         break;
     }
-
-    // console.log({status, sequence, userInput});
   }, [
     dispatch,
     status,
@@ -108,9 +105,7 @@ const Board = ({navigation}) => {
           visible={status && status === ACTION_TYPES.STATUS_ASK_NAME}
           onPress={text => {
             dispatch(addToResults({name: text, score: sequence.length - 1}));
-
             navigation.navigate('Results');
-
             dispatch(finish());
           }}
         />

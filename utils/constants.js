@@ -1,11 +1,6 @@
-// export const STATUS_TYPES = {
-//   STARTED: 'STARTED',
-//   BUTTON_PRESSED: 'BUTTON_PRESSED',
-//   FINISHED: 'FINISHED',
-//   SEQUENCE_RUNNING: 'SEQUENCE_RUNNING',
-// };
 export const COLORS = ['g', 'r', 'b', 'y'];
 export const FULL_COLORS = {g: 'green', r: 'red', b: 'blue', y: 'yellow'};
+export const GAME_DELAY = 500;
 export const LIGHT_COLORS = {
   g: 'lightgreen',
   r: 'lightcoral',
@@ -24,7 +19,6 @@ export const ACTION_TYPES = {
   ADD_INPUT: 'ADD_INPUT',
   RESET_INPUT: 'RESET_INPUT',
   ADD_RESULT: 'ADD_RESULT',
-  RESET_RESULTS: 'RESET_RESULTS',
   TURN_ON: 'TURN_ON',
   TURN_ALL_OFF: 'TURN_ALL_OFF',
 };

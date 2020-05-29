@@ -12,11 +12,7 @@ const Button = ({color, position}) => {
   const dispatch = useDispatch();
 
   let combinedStyles,
-    active = false;
-
-  if (turnOn === color[0]) {
-    active = true;
-  }
+    active = turnOn === color[0] ? true : false;
 
   const handleTouch = () => {
     playSound(`${color}.mp3`);

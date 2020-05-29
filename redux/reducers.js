@@ -29,11 +29,6 @@ export default function reducer(state = initialState, action) {
         ...state,
         status: ACTION_TYPES.STATUS_USER_INPUT,
       };
-    case ACTION_TYPES.STATUS_SEQUENCE_RUNNING:
-      return {
-        ...state,
-        status: ACTION_TYPES.STATUS_SEQUENCE_RUNNING,
-      };
     case ACTION_TYPES.STATUS_FINISH:
       return {
         ...state,
@@ -75,11 +70,6 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         results: [...state.results, {name: action.name, score: action.score}],
-      };
-    case ACTION_TYPES.RESET_RESULTS:
-      return {
-        ...state,
-        results: [],
       };
     default:
       return state;

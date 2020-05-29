@@ -4,15 +4,14 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import {persistStore, persistReducer} from 'redux-persist';
-
 import thunk from 'redux-thunk';
 import AsyncStorage from '@react-native-community/async-storage';
+import {Link} from '@react-navigation/native';
 
 import Board from './pages/Board';
 import Results from './pages/Results';
 import rootReducer from './redux/reducers';
 import {PersistGate} from 'redux-persist/integration/react';
-import {Link} from '@react-navigation/native';
 
 const persistConfig = {
   key: 'root',

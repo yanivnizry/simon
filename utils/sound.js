@@ -1,12 +1,8 @@
-export const playSound = audioFilename => {
-  // Import the react-native-sound module
-  var Sound = require('react-native-sound');
+import Sound from 'react-native-sound';
 
-  // Enable playback in silence mode
+export const playSound = audioFilename => {
   Sound.setCategory('Playback');
 
-  // Load the sound file 'sound.audioFilename' from the app bundle
-  // See notes below about preloading sounds within initialization code below.
   var sound = new Sound(audioFilename, Sound.MAIN_BUNDLE, error => {
     if (error) {
       console.log('failed to load the sound', error);

@@ -22,11 +22,6 @@ export const askName = () => dispatch => {
     type: ACTION_TYPES.STATUS_ASK_NAME,
   });
 };
-export const runSequence = () => dispatch => {
-  dispatch({
-    type: ACTION_TYPES.STATUS_SEQUENCE_RUNNING,
-  });
-};
 export const finish = () => dispatch => {
   dispatch({
     type: ACTION_TYPES.STATUS_FINISH,
@@ -40,11 +35,7 @@ export const addToResults = ({name, score}) => dispatch => {
     score,
   });
 };
-export const resetResults = () => dispatch => {
-  dispatch({
-    type: ACTION_TYPES.RESET_RESULTS,
-  });
-};
+
 export const addToSequence = key => dispatch => {
   dispatch({
     type: ACTION_TYPES.ADD_SEQ,
