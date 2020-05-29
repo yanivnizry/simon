@@ -12,6 +12,7 @@ import Board from './pages/Board';
 import Results from './pages/Results';
 import rootReducer from './redux/reducers';
 import {PersistGate} from 'redux-persist/integration/react';
+import {Link} from '@react-navigation/native';
 
 const persistConfig = {
   key: 'root',
@@ -29,7 +30,14 @@ const App = () => {
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen name="Simon Says" component={Board} />
+            <Stack.Screen
+              name="Simon Says"
+              component={Board}
+              options={{
+                // headerTitle: props => <LogoTitle {...props} />,
+                headerRight: () => <Link to="/Results"> Results </Link>,
+              }}
+            />
             <Stack.Screen name="Results" component={Results} />
           </Stack.Navigator>
         </NavigationContainer>

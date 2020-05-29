@@ -21,27 +21,26 @@ import {
 } from '../redux/actions';
 import {getOneRandomButton, sleep} from '../utils/sequence';
 import {playSound} from '../utils/sound';
-import Results from './Results';
 
 const Board = ({navigation}) => {
   const dispatch = useDispatch();
-  const status = useSelector((state) => state.status);
-  const sequence = useSelector((state) => state.sequence);
-  const userInput = useSelector((state) => state.userInput);
-  const results = useSelector((state) => state.results);
+  const status = useSelector(state => state.status);
+  const sequence = useSelector(state => state.sequence);
+  const userInput = useSelector(state => state.userInput);
+  const results = useSelector(state => state.results);
   const disabled = !(status === ACTION_TYPES.STATUS_FINISH);
 
   const playSequence = useCallback(async () => {
-    await sleep(15);
+    await sleep(500);
     for (let i = 0; i < sequence.length; i++) {
       const colorName = sequence[i];
       dispatch(turnOn(colorName));
       playSound(`${FULL_COLORS[colorName]}.mp3`);
-      await sleep(5);
+      await sleep(500);
       dispatch(turnAllOff());
-      await sleep(5);
+      await sleep(500);
     }
-    await sleep(15);
+    await sleep(500);
 
     dispatch(startUserInput());
   }, [dispatch, sequence]);
@@ -107,7 +106,7 @@ const Board = ({navigation}) => {
       <View style={styles.game}>
         <AskForName
           visible={status && status === ACTION_TYPES.STATUS_ASK_NAME}
-          onPress={(text) => {
+          onPress={text => {
             dispatch(addToResults({name: text, score: sequence.length - 1}));
 
             navigation.navigate('Results');
@@ -124,12 +123,8 @@ const Board = ({navigation}) => {
           <GameButton color="yellow" position="bottomRight" />
         </View>
       </View>
-      <Text style={{fontSize: 30, textAlign: 'center'}}>
-        {'Current Score:' + sequence.length}
-      </Text>
-      <Text style={{fontSize: 30, textAlign: 'center'}}>
-        {description.current}
-      </Text>
+      <Text style={styles.title}>{'Current Score:' + sequence.length}</Text>
+      <Text style={styles.title}>{description.current}</Text>
       <View style={styles.button}>
         <Button title="start" onPress={handleStartButton} disabled={disabled} />
       </View>
@@ -151,6 +146,10 @@ const styles = StyleSheet.create({
     marginTop: 50,
     justifyContent: 'center',
     flexDirection: 'row',
+  },
+  title: {
+    fontSize: 30,
+    textAlign: 'center',
   },
 });
 

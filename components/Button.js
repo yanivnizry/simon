@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React from 'react';
 import {View, StyleSheet, TouchableHighlight} from 'react-native';
 import {playSound} from '../utils/sound';
 import {useSelector, useDispatch} from 'react-redux';
